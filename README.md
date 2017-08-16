@@ -1,20 +1,22 @@
 schwifty-vim
 ============
 
-A humble, minimal vim plugin for Swift 4.0 development.
+A humble, minimal vim plugin for Swift 4.0 development assembled by Brian Heim.
 
-Fork of Apple's [swift/utils/vim](https://github.com/apple/swift) by Brian Heim. Original
-maintainer: Joe Groff.
+The syntax, ftplugin, and ftdetect files are taken from Apple's
+[swift/utils/vim](https://github.com/apple/swift). Original maintainer: Joe Groff.
 
-The indent file is taken from [keith/swift.vim](https://github.com/keith/swift.vim), which is
-licensed under the MIT license.
+The indent file is taken from Keith Smiley's [keith/swift.vim](https://github.com/keith/swift.vim).
 
-The remainder of this repository - Apple's files and my modifications - are Apache-2.0 licensed.
-Where modifications have been made, I have left a notice at the top of the file.
+Keith Smiley's indent file is licensed under the MIT license. The remainder of this repository -
+Apple's files and my modifications - are Apache-2.0 licensed. In accordance with that license, where
+modifications have been made, I have left a notice at the top of the file. See LICENSE.txt and
+NOTICE for details.
 
 I made this fork because I was dissatisfied by the other Swift/Vim integrations out there (either
 too bulky or not quite there yet), and wanted to move faster than Apple's review process would
-allow.
+allow. This is my first vim plugin. If you find it useful, please let me know. If you have
+suggestions, please, _please_ let me know!
 
 Installation
 ------------
