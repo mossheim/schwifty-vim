@@ -15,3 +15,10 @@ Where modifications have been made, I have left a notice at the top of the file.
 I made this fork because I was dissatisfied by the other Swift/Vim integrations out there (either
 too bulky or not quite there yet), and wanted to move faster than Apple's review process would
 allow.
+
+Installation
+------------
+
+With [Pathogen](https://github.com/tpope/vim-pathogen):
+
+    git clone https://github.com/brianlheim/schwifty-vim ~/.vim/bundle/schwifty-vim
