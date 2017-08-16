@@ -2,6 +2,10 @@
 " Original Author: Keith Smiley
 " Description: The indent file for Swift
 " Last Modified: January 8, 2016
+"
+" Modifications Copyright (C) 2017 Brian Heim
+" NOTE: This file is licensed under the MIT License. See the NOTICE in this repository for contents
+" of that license.
 
 if exists("b:did_indent")
   finish
