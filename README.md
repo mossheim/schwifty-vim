@@ -1,6 +1,8 @@
 schwifty-vim
 ============
 
+A humble, minimal vim plugin for Swift 4.0 development.
+
 Fork of Apple's [swift/utils/vim](https://github.com/apple/swift) by Brian Heim. Original
 maintainer: Joe Groff.
 
