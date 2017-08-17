@@ -174,6 +174,8 @@ syn match swiftNilOps "??"
 syn region swiftReservedIdentifier oneline
       \ start=/`/ end=/`/
 
+hi def link swiftConstraint swiftKeyword
+
 hi def link swiftImport Include
 hi def link swiftImportModule Title
 hi def link swiftImportComponent Identifier
@@ -184,7 +186,6 @@ hi def link swiftMultiwordTypeDefinition Define
 hi def link swiftType Type
 hi def link swiftTypePair Type
 hi def link swiftTypeName Function
-hi def link swiftConstraint Special
 hi def link swiftFuncDefinition Define
 hi def link swiftDefinitionModifier Define
 hi def link swiftInOutKeyword Define
@@ -198,7 +199,7 @@ hi def link swiftTypeDeclaration Delimiter
 hi def link swiftTypeParameters Delimiter
 hi def link swiftBoolean Boolean
 hi def link swiftString String
-hi def link swiftInterpolation Special
+hi def link swiftInterpolation Delimiter
 hi def link swiftComment Comment
 hi def link swiftLineComment Comment
 hi def link swiftDecimal Number
