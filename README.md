@@ -1,6 +1,8 @@
 schwifty-vim
 ============
 
+![GitHub version](https://badge.fury.io/gh/brianlheim%2Fschwifty-vim.svg)]
+
 A humble, minimal vim plugin for Swift 4 development assembled by Brian Heim.
 
 The syntax, ftplugin, and ftdetect files are taken from Apple's
