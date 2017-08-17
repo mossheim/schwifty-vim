@@ -143,8 +143,13 @@ syn match swiftTypeDeclaration skipwhite nextgroup=swiftType
 
 syn region swiftString start=/"/ skip=/\\\\\|\\"/ end=/"/ contains=swiftInterpolationRegion
 syn region swiftInterpolationRegion matchgroup=swiftInterpolation start=/\\(/ end=/)/ contained contains=TOP
-syn region swiftComment start="/\*" end="\*/" contains=swiftComment,swiftLineComment,swiftTodo
-syn region swiftLineComment start="//" end="$" contains=swiftComment,swiftTodo
+
+" comments: four types. (block, line) x (normal, doc)
+syn region swiftBlockComment start="/\*" end="\*/" contains=swiftTodo
+syn region swiftLineComment start="//" end="$" contains=swiftTodo
+
+syn region swiftBlockDocComment start="/\*\*" end="\*/" contains=swiftTodo
+syn region swiftLineDocComment start="///" end="$" contains=swiftTodo
 
 syn match swiftDecimal /[+\-]\?\<\([0-9][0-9_]*\)\([.][0-9_]*\)\?\([eE][+\-]\?[0-9][0-9_]*\)\?\>/
 syn match swiftHex /[+\-]\?\<0x[0-9A-Fa-f][0-9A-Fa-f_]*\(\([.][0-9A-Fa-f_]*\)\?[pP][+\-]\?[0-9][0-9_]*\)\?\>/
@@ -200,12 +205,12 @@ hi def link swiftTypeParameters Delimiter
 hi def link swiftBoolean Boolean
 hi def link swiftString String
 hi def link swiftInterpolation Delimiter
-hi def link swiftComment Comment
-hi def link swiftLineComment Comment
+
 hi def link swiftDecimal Number
 hi def link swiftHex Number
 hi def link swiftOct Number
 hi def link swiftBin Number
+
 hi def link swiftOperator Function
 hi def link swiftChar Character
 hi def link swiftLabel Operator
@@ -218,5 +223,15 @@ hi def link swiftNil Constant
 hi def link swiftCastOp Operator
 hi def link swiftNilOps Operator
 hi def link swiftScope PreProc
+
+" link comment types together, to swiftComment
+hi def link swiftLineComment swiftComment
+hi def link swiftBlockComment swiftComment
+hi def link swiftComment Comment
+
+" link doc comment types together, to SpecialComment
+hi def link swiftLineDocComment swiftDocComment
+hi def link swiftBlockDocComment swiftDocComment
+hi def link swiftDocComment SpecialComment
 
 let b:current_syntax = "swift"
