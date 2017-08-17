@@ -44,17 +44,19 @@ endfunction
 
 function! s:IsExcludedFromIndentAtPosition(line, column)
   let name = s:SyntaxNameAtPosition(a:line, a:column)
-  return name ==# "swiftComment" || name ==# "swiftString"
+  return name =~# "swift.*Comment" || name ==# "swiftString"
 endfunction
 
 function! s:IsExcludedFromIndent()
-  return s:SyntaxName() ==# "swiftComment" || s:SyntaxName() ==# "swiftString"
+  return s:SyntaxName() =~# "swift.*Comment" || s:SyntaxName() ==# "swiftString"
 endfunction
 
+" true if it's anyting with "swift ... Comment"
 function! s:IsCommentLine(lnum)
-    return synIDattr(synID(a:lnum,
-          \     match(getline(a:lnum), "\S") + 1, 0), "name")
-          \ ==# "swiftComment"
+  " Note: the regexp has to be "\\S", not "\S".
+  let firstPrintingChar = match(getline(a:lnum), "\\S") + 1
+  let idAttr = s:SyntaxNameAtPosition(a:lnum, firstPrintingChar)
+  return idAttr =~# "swift.*Comment"
 endfunction
 
 function! SwiftIndent(...)
