@@ -1,1 +1,1 @@
-setlocal comments=s1:/*,mb:*,ex:*/,:///,://
+setlocal comments=sr:/*,mb:*,ex:*/,:///,://
