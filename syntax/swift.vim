@@ -83,7 +83,7 @@ syn keyword swiftTypeDefinition skipwhite nextgroup=swiftTypeName
       \ protocol
       \ struct
       \ typealias
-syn match swiftMultiwordTypeDefinition nextgroup=swiftTypeName
+syn match swiftMultiwordTypeDefinition skipwhite nextgroup=swiftTypeName
       \ "indirect enum"
 
 syn keyword swiftVarDefinition skipwhite nextgroup=swiftVarName
@@ -108,7 +108,7 @@ syn match swiftImportModule contained nextgroup=swiftImportComponent
 syn match swiftImportComponent contained nextgroup=swiftImportComponent
       \ /\.\<[A-Za-z_][A-Za-z_0-9]*\>/
 
-syn match swiftTypeName contained nextgroup=swiftTypeParameters
+syn match swiftTypeName contained skipwhite nextgroup=swiftTypeParameters
       \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>/
 syn match swiftVarName contained skipwhite nextgroup=swiftTypeDeclaration
       \ /\<[A-Za-z_][A-Za-z_0-9]*\>/
@@ -116,12 +116,12 @@ syn match swiftImplicitVarName
       \ /\$\<[A-Za-z_0-9]\+\>/
 
 " TypeName[Optionality]?
-syn match swiftType contained nextgroup=swiftTypeParameters
+syn match swiftType contained skipwhite nextgroup=swiftTypeParameters
       \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>[!?]\?/
 " [Type:Type] (dictionary) or [Type] (array)
 syn region swiftType contained contains=swiftTypePair,swiftType
       \ matchgroup=Delimiter start=/\[/ end=/\]/
-syn match swiftTypePair contained nextgroup=swiftTypeParameters,swiftTypeDeclaration
+syn match swiftTypePair contained skipwhite nextgroup=swiftTypeParameters,swiftTypeDeclaration
       \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>[!?]\?/
 " (Type[, Type]) (tuple)
 " FIXME: we should be able to use skip="," and drop swiftParamDelim
