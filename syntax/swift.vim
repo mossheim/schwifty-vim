@@ -8,138 +8,140 @@ if exists("b:current_syntax")
     finish
 endif
 
+" TODO: redo keyword/punctuation rules based on https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html
+" add # to iskeyword (see :syn-iskeyword)
 syn keyword swiftKeyword
-      \ associatedtype
-      \ break
-      \ case
-      \ catch
-      \ continue
-      \ default
-      \ defer
-      \ do
-      \ else
-      \ fallthrough
-      \ for
-      \ guard
-      \ if
-      \ in
-      \ repeat
-      \ return
-      \ switch
-      \ throw
-      \ try
-      \ where
-      \ while
+    \ associatedtype
+    \ break
+    \ case
+    \ catch
+    \ continue
+    \ default
+    \ defer
+    \ do
+    \ else
+    \ fallthrough
+    \ for
+    \ guard
+    \ if
+    \ in
+    \ repeat
+    \ return
+    \ switch
+    \ throw
+    \ try
+    \ where
+    \ while
 syn match swiftMultiwordKeyword
-      \ "indirect case"
+    \ "indirect case"
 
 syn keyword swiftImport skipwhite nextgroup=swiftImportModule
-      \ import
+    \ import
 
 syn keyword swiftDefinitionModifier
-      \ convenience
-      \ dynamic
-      \ fileprivate
-      \ final
-      \ internal
-      \ nonmutating
-      \ open
-      \ override
-      \ private
-      \ public
-      \ required
-      \ rethrows
-      \ static
-      \ throws
-      \ weak
+    \ convenience
+    \ dynamic
+    \ fileprivate
+    \ final
+    \ internal
+    \ nonmutating
+    \ open
+    \ override
+    \ private
+    \ public
+    \ required
+    \ rethrows
+    \ static
+    \ throws
+    \ weak
 
 syn keyword swiftInOutKeyword skipwhite nextgroup=swiftTypeName
-      \ inout
+    \ inout
 
 syn keyword swiftIdentifierKeyword
-      \ Self
-      \ metatype
-      \ self
-      \ super
+    \ Self
+    \ metatype
+    \ self
+    \ super
 
 syn keyword swiftFuncKeywordGeneral skipwhite nextgroup=swiftTypeParameters
-      \ init
+    \ init
 
 syn keyword swiftFuncKeyword
-      \ deinit
-      \ subscript
+    \ deinit
+    \ subscript
 
 syn keyword swiftScope
-      \ autoreleasepool
+    \ autoreleasepool
 
 syn keyword swiftMutating skipwhite nextgroup=swiftFuncDefinition
-      \ mutating
+    \ mutating
 syn keyword swiftFuncDefinition skipwhite nextgroup=swiftTypeName,swiftOperator
-      \ func
+    \ func
 
 syn keyword swiftTypeDefinition skipwhite nextgroup=swiftTypeName
-      \ class
-      \ enum
-      \ extension
-      \ protocol
-      \ struct
-      \ typealias
+    \ class
+    \ enum
+    \ extension
+    \ protocol
+    \ struct
+    \ typealias
 syn match swiftMultiwordTypeDefinition skipwhite nextgroup=swiftTypeName
-      \ "indirect enum"
+    \ "indirect enum"
 
 syn keyword swiftVarDefinition skipwhite nextgroup=swiftVarName
-      \ let
-      \ var
+    \ let
+    \ var
 
 syn keyword swiftLabel
-      \ get
-      \ set
-      \ didSet
-      \ willSet
+    \ get
+    \ set
+    \ didSet
+    \ willSet
 
 syn keyword swiftBoolean
-      \ false
-      \ true
+    \ false
+    \ true
 
 syn keyword swiftNil
-      \ nil
+    \ nil
 
 syn match swiftImportModule contained nextgroup=swiftImportComponent
-      \ /\<[A-Za-z_][A-Za-z_0-9]*\>/
+    \ /\<[A-Za-z_][A-Za-z_0-9]*\>/
 syn match swiftImportComponent contained nextgroup=swiftImportComponent
-      \ /\.\<[A-Za-z_][A-Za-z_0-9]*\>/
+    \ /\.\<[A-Za-z_][A-Za-z_0-9]*\>/
 
 syn match swiftTypeName contained skipwhite nextgroup=swiftTypeParameters
-      \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>/
+    \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>/
 syn match swiftVarName contained skipwhite nextgroup=swiftTypeDeclaration
-      \ /\<[A-Za-z_][A-Za-z_0-9]*\>/
+    \ /\<[A-Za-z_][A-Za-z_0-9]*\>/
 syn match swiftImplicitVarName
-      \ /\$\<[A-Za-z_0-9]\+\>/
+    \ /\$\<[A-Za-z_0-9]\+\>/
 
 " TypeName[Optionality]?
 syn match swiftType contained skipwhite nextgroup=swiftTypeParameters
-      \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>[!?]\?/
+    \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>[!?]\?/
 " [Type:Type] (dictionary) or [Type] (array)
 syn region swiftType contained contains=swiftTypePair,swiftType
-      \ matchgroup=Delimiter start=/\[/ end=/\]/
+    \ matchgroup=Delimiter start=/\[/ end=/\]/
 syn match swiftTypePair contained skipwhite nextgroup=swiftTypeParameters,swiftTypeDeclaration
-      \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>[!?]\?/
+    \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>[!?]\?/
 " (Type[, Type]) (tuple)
 " FIXME: we should be able to use skip="," and drop swiftParamDelim
 syn region swiftType contained contains=swiftType,swiftParamDelim
-      \ matchgroup=Delimiter start="[^@](" end=")" matchgroup=NONE skip=","
+    \ matchgroup=Delimiter start="[^@](" end=")" matchgroup=NONE skip=","
 syn match swiftParamDelim contained
-      \ /,/
+    \ /,/
 " <Generic Clause> (generics)
 syn region swiftTypeParameters contained contains=swiftVarName,swiftConstraint
-      \ matchgroup=Delimiter start="<" end=">" matchgroup=NONE skip=","
+    \ matchgroup=Delimiter start="<" end=">" matchgroup=NONE skip=","
 syn keyword swiftConstraint contained
-      \ where
+    \ where
 
 syn match swiftTypeDeclaration skipwhite nextgroup=swiftType,swiftInOutKeyword
-      \ /:/
+    \ /:/
 syn match swiftTypeDeclaration skipwhite nextgroup=swiftType
-      \ /->/
+    \ /->/
 
 syn region swiftString start=/"/ skip=/\\\\\|\\"/ end=/"/ contains=swiftInterpolationRegion
 syn region swiftInterpolationRegion matchgroup=swiftInterpolation start=/\\(/ end=/)/ contained contains=TOP
@@ -177,7 +179,7 @@ syn match swiftCastOp "\<as\>[!?]\?" skipwhite nextgroup=swiftType
 syn match swiftNilOps "??"
 
 syn region swiftReservedIdentifier oneline
-      \ start=/`/ end=/`/
+    \ start=/`/ end=/`/
 
 hi def link swiftConstraint swiftKeyword
 
