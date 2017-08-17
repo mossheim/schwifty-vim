@@ -161,7 +161,9 @@ syn region swiftPreprocFalse start="^\s*#\<if\>\s\+\<false\>" end="^\s*#\(\<else
 
 syn match swiftAttribute /@\<\w\+\>/ skipwhite nextgroup=swiftType
 
-syn keyword swiftTodo MARK TODO FIXME contained
+" Xcode's interface summary features don't work with these tags unless they're followed by :
+" But we only want to highlight the word, so me=e-1
+syn match swiftTodo /\(MARK\|TODO\|FIXME\):/me=e-1 contained
 
 syn match swiftCastOp "\<is\>" skipwhite nextgroup=swiftType
 syn match swiftCastOp "\<as\>[!?]\?" skipwhite nextgroup=swiftType
