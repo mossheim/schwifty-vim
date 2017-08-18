@@ -10,6 +10,11 @@ endif
 
 " TODO: redo keyword/punctuation rules based on https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html
 " add # to iskeyword (see :syn-iskeyword)
+
+" keywords can have alphanumerics, _, #
+" see isfname for format
+syn iskeyword 48-57,a-z,A-Z,#,_
+
 syn keyword swiftKeyword
     \ associatedtype
     \ break
@@ -163,9 +168,23 @@ syn match swiftOperator "\.\.[<\.]" skipwhite nextgroup=swiftTypeParameters
 
 syn match swiftChar /'\([^'\\]\|\\\(["'tnr0\\]\|x[0-9a-fA-F]\{2}\|u[0-9a-fA-F]\{4}\|U[0-9a-fA-F]\{8}\)\)'/
 
-syn match swiftPreproc /#\(\<file\>\|\<line\>\|\<function\>\|\<selector\>\)/
-syn match swiftPreproc /^\s*#\(\<if\>\|\<else\>\|\<elseif\>\|\<endif\>\)/
-syn region swiftPreprocFalse start="^\s*#\<if\>\s\+\<false\>" end="^\s*#\(\<else\>\|\<elseif\>\|\<endif\>\)"
+syn keyword swiftPreproc
+    \ #available
+    \ #colorLiteral
+    \ #column
+    \ #else
+    \ #elseif
+    \ #endif
+    \ #file
+    \ #fileLiteral
+    \ #function
+    \ #if
+    \ #imageLiteral
+    \ #line
+    \ #selector
+    \ #sourceLocation
+
+syn region swiftPreprocFalse start="#if\>\s\+\<false\>" end="#\(else\>\|elseif\>\|endif\>\)"
 
 syn match swiftAttribute /@\<\w\+\>/ skipwhite nextgroup=swiftType
 
