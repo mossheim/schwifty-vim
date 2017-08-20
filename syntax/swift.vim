@@ -168,23 +168,58 @@ syn match swiftOperator "\.\.[<\.]" skipwhite nextgroup=swiftTypeParameters
 
 syn match swiftChar /'\([^'\\]\|\\\(["'tnr0\\]\|x[0-9a-fA-F]\{2}\|u[0-9a-fA-F]\{4}\|U[0-9a-fA-F]\{8}\)\)'/
 
-syn keyword swiftPreproc
-    \ #available
-    \ #colorLiteral
-    \ #column
-    \ #else
-    \ #elseif
-    \ #endif
-    \ #file
-    \ #fileLiteral
-    \ #function
-    \ #if
-    \ #imageLiteral
-    \ #line
-    \ #selector
-    \ #sourceLocation
+syn match swiftPreproc "#available"
+syn match swiftPreproc "#colorLiteral"
+syn match swiftPreproc "#column"
+syn match swiftPreproc "#else"
+syn match swiftPreproc "#elseif"
+syn match swiftPreproc "#endif"
+syn match swiftPreproc "#file"
+syn match swiftPreproc "#fileLiteral"
+syn match swiftPreproc "#function"
+syn match swiftPreproc "#if"
+syn match swiftPreproc "#imageLiteral"
+syn match swiftPreproc "#line"
+syn match swiftPreproc "#selector"
+syn match swiftPreproc "#sourceLocation"
 
-syn region swiftPreprocFalse start="#if\>\s\+\<false\>" end="#\(else\>\|elseif\>\|endif\>\)"
+" ------ unused preprocessor branch highlighting ------
+
+" allow the #else / #elseif to be highlighted, but not #endif
+" NOTE: the #endif ones have to come first, otherwise they'll match first and the
+" else/elseif highlighting will be clobbered
+syn region swiftPreprocFalse
+    \ start="#\(if\|elseif\)\s\+\<false\>"
+    \ end="#endif\>"
+    \ end="#\(else\>\|elseif\>\)\>"me=s-1
+
+" highlight the alternate branch of an `#if true`
+" TODO: not working yet; very tricky. maybe not possible at all in corner cases (chained trues)
+" syn region swiftPreprocFalse
+"     \ start="#\(if\|elseif\)\s\+\<true\>\_.\{-}#\(else\|elseif\|endif\)"ms=e
+"     \ end="#endif\>"me=s-1
+"     \ end="#\(else\>\|elseif\>\)\>"me=s-1
+
+if !exists("g:schwifty_comment_unused_os_preproc")
+    let g:schwifty_comment_unused_os_preproc=1
+endif
+
+if g:schwifty_comment_unused_os_preproc
+    " comment chunks based on os() directives
+    if has('macunix')
+        syn region swiftPreprocFalse
+            \ start="#\(elseif\|if\)\s\+os(Linux)"
+            \ end="#endif\>"
+            \ end="#\(else\>\|elseif\>\)"me=s-1
+    else
+        syn region swiftPreprocFalse
+            \ start="#\(elseif\|if\)\s\+os(\(OSX\|macOS\|iOS\|watchOS\|tvOS\))"
+            \ end="#endif\>"
+            \ end="#\(else\>\|elseif\>\)"me=s-1
+    endif
+endif
+
+" ------ miscellaneous groups -----
 
 syn match swiftAttribute /@\<\w\+\>/ skipwhite nextgroup=swiftType
 
