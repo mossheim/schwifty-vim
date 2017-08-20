@@ -148,8 +148,10 @@ syn match swiftTypeDeclaration skipwhite nextgroup=swiftType,swiftInOutKeyword
 syn match swiftTypeDeclaration skipwhite nextgroup=swiftType
     \ /->/
 
-syn region swiftString start=/"/ skip=/\\\\\|\\"/ end=/"/ contains=swiftInterpolationRegion
-syn region swiftInterpolationRegion matchgroup=swiftInterpolation start=/\\(/ end=/)/ contained contains=TOP
+syn region swiftString oneline contains=swiftInterpolationRegion
+    \ start=/"/ skip=/\\\\\|\\"/ end=/"/
+syn region swiftInterpolationRegion oneline matchgroup=swiftInterpolation contained contains=TOP
+    \ start=/\\(/ end=/)/
 
 " comments: four types. (block, line) x (normal, doc)
 syn region swiftBlockComment start="/\*" end="\*/" contains=swiftTodo
