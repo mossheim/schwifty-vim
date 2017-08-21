@@ -8,6 +8,8 @@ The syntax, ftplugin, and ftdetect files are taken from Apple's
 
 The indent file is taken from Keith Smiley's [keith/swift.vim](https://github.com/keith/swift.vim).
 
+I have made modifications to both to expand syntax coverage and fix issues I noticed.
+
 Keith Smiley's indent file is licensed under the MIT license. The remainder of this repository -
 Apple's files and my modifications - are Apache-2.0 licensed. In accordance with that license, where
 modifications have been made, I have left a notice at the top of the file. See LICENSE.txt and
