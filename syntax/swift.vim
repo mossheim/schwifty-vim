@@ -201,6 +201,11 @@ syn match swiftDocCommentFormatting contained "\([^/] *\)\@<!\( *-\)\{3,} *$"
 syn match swiftDocCommentFormatting contained "\([^/] *\)\@<!\( *_\)\{3,} *$"
 syn match swiftDocCommentFormatting contained "\([^/] *\)\@<!\( *\*\)\{3,} *$"
 
+" code blocks (````)
+syn region swiftDocCommentFormatting contained start="````" end="````"
+
+" TODO: indented code blocks? tricky.
+
 syn match swiftDecimal /[+\-]\?\<\([0-9][0-9_]*\)\([.][0-9_]*\)\?\([eE][+\-]\?[0-9][0-9_]*\)\?\>/
 syn match swiftHex /[+\-]\?\<0x[0-9A-Fa-f][0-9A-Fa-f_]*\(\([.][0-9A-Fa-f_]*\)\?[pP][+\-]\?[0-9][0-9_]*\)\?\>/
 syn match swiftOct /[+\-]\?\<0o[0-7][0-7_]*\>/

@@ -102,3 +102,13 @@ adabra
 /// * *
 /// __
 /// _ _
+
+/// Code blocks look like this:
+/**
+    ````
+    func throwBunnies(_ numberOfBunnies: Int) -> Int {
+        print("You monster!")
+        return numberOfBunnies - 1
+    }
+    ````
+ */
