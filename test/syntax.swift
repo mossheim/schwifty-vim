@@ -111,4 +111,14 @@ adabra
         return numberOfBunnies - 1
     }
     ````
- */
+
+*/
+
+/// Code voice looks like this:
+/// `for` all `actions` there is an equal and `opposite` reaction
+/// `code voice` code looks like `\`code voice\`` code.
+
+/// Emphasis and bolding:
+/// *emphasized!*, **bolded**
+/// \*not emphasized\*
+/// \*\*not bolded \*\*

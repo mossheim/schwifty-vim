@@ -161,9 +161,9 @@ syn region swiftBlockComment start="/\*" end="\*/" contains=swiftTodo
 syn region swiftLineComment start="//" end="$" contains=swiftTodo
 
 syn region swiftBlockDocComment start="/\*\*" end="\*/"
-    \ contains=swiftTodo,swiftDocCommentKeyword,swiftDocCommentParameterName,swiftDocCommentFormatting
+    \ contains=@swiftDocCommentMarkup
 syn region swiftLineDocComment start="///" end="$"
-    \ contains=swiftTodo,swiftDocCommentKeyword,swiftDocCommentParameterName,swiftDocCommentFormatting
+    \ contains=@swiftDocCommentMarkup
 
 " \ before [-+*] escapes that character, so don't highlight
 syn match swiftDocCommentKeyword contained "\\\@<![\*+\-] \(
@@ -205,6 +205,21 @@ syn match swiftDocCommentFormatting contained "\([^/] *\)\@<!\( *\*\)\{3,} *$"
 syn region swiftDocCommentFormatting contained start="````" end="````"
 
 " TODO: indented code blocks? tricky.
+
+syn region swiftDocCommentFormatting oneline contained start="\(```\)\@<!`" skip="\\`" end="`"
+
+syn region swiftDocCommentEmphasis oneline contained start="\\\@<!\*" skip="\\\*" end="\*"
+syn region swiftDocCommentEmphasis oneline contained start="\\\@<!_" skip="\\_" end="_"
+
+syn region swiftDocCommentStrong oneline contained start="\\\@<!\*\*" skip="\\\*" end="\*\*"
+syn region swiftDocCommentStrong oneline contained start="\\\@<!__" skip="\\_" end="__"
+
+syn cluster swiftDocCommentMarkup contains=
+    \ swiftDocCommentKeyword,
+    \ swiftDocCommentFormatting,
+    \ swiftDocCommentEmphasis,
+    \ swiftDocCommentStrong,
+    \ swiftDocCommentParameterName
 
 syn match swiftDecimal /[+\-]\?\<\([0-9][0-9_]*\)\([.][0-9_]*\)\?\([eE][+\-]\?[0-9][0-9_]*\)\?\>/
 syn match swiftHex /[+\-]\?\<0x[0-9A-Fa-f][0-9A-Fa-f_]*\(\([.][0-9A-Fa-f_]*\)\?[pP][+\-]\?[0-9][0-9_]*\)\?\>/
@@ -338,8 +353,12 @@ hi def link swiftLineDocComment swiftDocComment
 hi def link swiftBlockDocComment swiftDocComment
 hi def link swiftDocComment SpecialComment
 
+" link doc comment markup
+" TODO: strong/emphasis get special highlighting
+hi def link swiftDocCommentFormatting Special
+hi def link swiftDocCommentStrong Special
+hi def link swiftDocCommentEmphasis Special
 hi def link swiftDocCommentKeyword Special
 hi def link swiftDocCommentParameterName swiftVarName
-hi def link swiftDocCommentFormatting swiftDocCommentKeyword
 
 let b:current_syntax = "swift"
