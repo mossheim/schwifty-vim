@@ -160,6 +160,7 @@ hi link swiftMultilineString swiftString
 syn region swiftBlockComment start="/\*" end="\*/" contains=swiftTodo
 syn region swiftLineComment start="//" end="$" contains=swiftTodo
 
+" TODO: consider including syntax/markdown.vim
 syn region swiftBlockDocComment start="/\*\*" end="\*/"
     \ contains=@swiftDocCommentMarkup
 syn region swiftLineDocComment start="///" end="$"
