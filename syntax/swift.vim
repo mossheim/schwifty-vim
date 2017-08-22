@@ -206,12 +206,12 @@ syn region swiftDocCommentFormatting contained start="````" end="````"
 
 " TODO: indented code blocks? tricky.
 
-syn region swiftDocCommentFormatting oneline contained start="\(```\)\@<!`" skip="\\`" end="`"
+syn region swiftDocCommentFormatting oneline contained start="\(```\)\@<!`\(```\)\@!" skip="\\`" end="`"
 
-syn region swiftDocCommentEmphasis oneline contained start="\\\@<!\*" skip="\\\*" end="\*"
+syn region swiftDocCommentEmphasis oneline contained start="[\\/]\@<!\*" skip="\\\*" end="\*"
 syn region swiftDocCommentEmphasis oneline contained start="\\\@<!_" skip="\\_" end="_"
 
-syn region swiftDocCommentStrong oneline contained start="\\\@<!\*\*" skip="\\\*" end="\*\*"
+syn region swiftDocCommentStrong oneline contained start="[\\/]\@<!\*\*" skip="\\\*" end="\*\*"
 syn region swiftDocCommentStrong oneline contained start="\\\@<!__" skip="\\_" end="__"
 
 syn cluster swiftDocCommentMarkup contains=
