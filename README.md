@@ -27,7 +27,7 @@ Some of the specific features I've added for syntax highlighting are:
 
 - Support for doc comments `/** */`, `///`
 - Support for multiline string literals `""" ... """`
-- Support for doc comment keywords like `- Returns:`, `- Parameter x:`, and `- Throws:`
+- [Support for doc comment keywords](examples/syntax_doc_comments.png) like `- Returns:`, `- Parameter x:`, and `- Throws:`
 - Commenting-out blocks of code that are turned off by the `#if os(myOS)` directive
 - Support for all compilation directives, including `#sourceLocation`, `#selector`, and
   `#imageLiteral`
