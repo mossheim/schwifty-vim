@@ -160,8 +160,46 @@ hi link swiftMultilineString swiftString
 syn region swiftBlockComment start="/\*" end="\*/" contains=swiftTodo
 syn region swiftLineComment start="//" end="$" contains=swiftTodo
 
-syn region swiftBlockDocComment start="/\*\*" end="\*/" contains=swiftTodo
-syn region swiftLineDocComment start="///" end="$" contains=swiftTodo
+syn region swiftBlockDocComment start="/\*\*" end="\*/"
+    \ contains=swiftTodo,swiftDocCommentKeyword,swiftDocCommentParameterName,swiftDocCommentFormatting
+syn region swiftLineDocComment start="///" end="$"
+    \ contains=swiftTodo,swiftDocCommentKeyword,swiftDocCommentParameterName,swiftDocCommentFormatting
+
+" \ before [-+*] escapes that character, so don't highlight
+syn match swiftDocCommentKeyword contained "\\\@<![\*+\-] \(
+    \Attention\|
+    \Authors\?\|
+    \Bug\|
+    \Complexity\|
+    \Copyright\|
+    \Callout([^)]*)\|
+    \Date\|
+    \Example\|
+    \Experiment\|
+    \Important\|
+    \Invariant\|
+    \Note\|
+    \Postcondition\|
+    \Precondition\|
+    \Remark\|
+    \Returns\|
+    \Requires\|
+    \SeeAlso\|
+    \Since\|
+    \Throws\|
+    \ToDo\|
+    \Version\|
+    \Warning\|
+    \\):"hs=s+2
+
+syn region swiftDocCommentParameterName contained oneline matchgroup=swiftDocCommentKeyword
+    \ start="[\*+\-] Parameter " skip="\\:" end=":"
+
+" need at least 3 [*-_] on a separate line. whitespace is OK
+" don't match if there's anything except / before. rough workaround, should be fine.
+syn match swiftDocCommentFormatting contained "\([^/] *\)\@<!\( *-\)\{3,} *$"
+syn match swiftDocCommentFormatting contained "\([^/] *\)\@<!\( *_\)\{3,} *$"
+syn match swiftDocCommentFormatting contained "\([^/] *\)\@<!\( *\*\)\{3,} *$"
 
 syn match swiftDecimal /[+\-]\?\<\([0-9][0-9_]*\)\([.][0-9_]*\)\?\([eE][+\-]\?[0-9][0-9_]*\)\?\>/
 syn match swiftHex /[+\-]\?\<0x[0-9A-Fa-f][0-9A-Fa-f_]*\(\([.][0-9A-Fa-f_]*\)\?[pP][+\-]\?[0-9][0-9_]*\)\?\>/
@@ -294,5 +332,9 @@ hi def link swiftComment Comment
 hi def link swiftLineDocComment swiftDocComment
 hi def link swiftBlockDocComment swiftDocComment
 hi def link swiftDocComment SpecialComment
+
+hi def link swiftDocCommentKeyword Special
+hi def link swiftDocCommentParameterName swiftVarName
+hi def link swiftDocCommentFormatting swiftDocCommentKeyword
 
 let b:current_syntax = "swift"
