@@ -32,6 +32,8 @@ Some of the specific features I've added for syntax highlighting are:
 - Support for all compilation directives, including `#sourceLocation`, `#selector`, and
   `#imageLiteral`
 
+![doc comment screenshot](examples/syntax_doc_comments.png)
+
 Installation
 ------------
 
